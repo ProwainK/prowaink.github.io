@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<title>寶可夢 藍版 - Any% NSC</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Google Fonts: Inconsolata -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Inconsolata" />
+
+<style>
+html, body {
+  margin: 10 10 10 10;
+  padding: 0;
+  background-color: #111111;
+  font-family: 'Inconsolata', monospace, '源泉圓體 TTF', sans-serif;
+  text-shadow: 1px 1px 1px black;
+}
+
+a, #rule_button {
+  text-shadow: 1px 1px 1px black;
+  text-decoration: none; /* none, underline */
+  color: Moccasin;
+  animation: change-color 3s infinite;
+}
+
+@keyframes change-color {
+  50% {
+    text-shadow: 1px 1px 25px silver;
+  }
+}
+
+#content {
+  width: 99%;
+  display: block;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  color: DarkGray;
+}
+
+table {
+  border: 2px white solid;
+}
+
+div {
+  display: inline;
+}
+
+h1, h2, h3 {
+  color: white;
+  display: inline;
+  font-weight: normal;
+}
+
+img {
+  width: 100%;
+}
+
+#rule_button:hover, a:hover {
+  background-color: #333333;
+}
+</style>
+</head>
+
+
+<body>
+<div id='content'><h1>寶可夢 藍版 - Any% NSC</h1>
+
+更新：2019/01/29
+
+<!-- -------------- --><hr />
+<h3>前言</h3>
+
+藍版 Any% NSC 並不需要叫出森林便利商店，
+相較於黃版更容易上手。
+
+以下流程省略了對戰期間的操作，
+像是一發捕捉烈雀和皮卡丘一發爆擊烈雀，
+著重在比較困難的 4A Press 遇到烈雀，
+還有最開頭的 TID Manip，
+需要熟練手順和 Buffer Input 技巧，
+搭配視覺提示在正確的位置上輸入指令。
+
+<!-- -------------- --><hr />
+<h2><div id='rule_button'>規則</div> & <a
+href="https://www.speedrun.com/pkmnredblue#Any_No_Save_Corruption"
+target="_blank">排行榜</a></h2>
+
+<div id='rule' style='display: none'><h3>Any% NSC 規則</h3>
+
+- 上傳必須要有影片證明。
+
+- 使用 RTA 方式計時，
+  按下 New Game 時開始計時，
+  在 Credits 前的畫面全白結束計時。
+
+- 允許存檔和退出。
+
+- 投稿記錄必須使用英文版。
+
+- 禁止破壞存檔。
+
+- 其他遊戲漏洞 (trainer-fly，old man，etc) 都可以使用
+
+- 禁止在有既有存檔的狀態下開始遊戲。
+  你可以在標題畫面用上 + Select + B 刪除存檔。
+
+- 禁止 SFC 的 Super Game Boy (FPS 不準確)，
+  但是允許 Super Game Boy 2。
+
+- 禁止禁止所有 Game Boy Tower (模擬不準確)。
+
+- 唯一允許的模擬器是最新版本的 gambatte-speedrun (目前為 r649)，
+  並使用 GBC Bios。
+
+- 全程禁止模擬器的即存功能和加速
+
+- 禁止使用自訂調色板
+
+- 如果使用模擬器，你必須要在以下兩者至少選一項
+
+  (1) 十分鐘內 Hard Reset，
+      記錄影片中必須要有這個 Reset 過程
+
+  (2) 視窗擷取整個模擬器畫面，包含視窗邊框
+</div>
+<!-- -------------- --><hr />
+<h3>流程概要</h3>
+
+- 利用 Buffer Input 取得<font color="salmon">理想的 Trainer ID</font>
+- 保持<font color="salmon">高速對話</font>，完成<font color="salmon">送貨事件</font>
+- 利用 Buffer Input 和 A Press <font color="salmon">抓一隻烈雀</font>
+- 利用 Buffer Input 和 A Press <font color="salmon">森林不遇敵 + 遇到皮卡丘</font>
+- 被皮卡丘電爆，<font color="salmon">觸發 Deathfly 巫術</font>
+- 跑完剩下步驟
+
+<!-- -------------- --><hr />
+<h3>準備</h3>
+
+- 版本：
+  <font color="salmon">藍版 / 美版</font>
+  有些巫術只有紅 / 藍的美版才能觸發，
+  受影響的規則有 Any% NSC、Catch 'Em All 和 Reverse Badge Order
+
+- 實機：
+  <font color="salmon">GBA / GBP</font>
+
+- 模擬器 (社群唯一允許)：
+  <font color="salmon">gambatte-speedrun Release 5, Build 649</font>
+  (gambatte-speedrun-r649-psr.zip)
+  (<font color="salmon">需要 GBC Bios</font>)
+  寶可夢 Speedrun 社群開發的第一、二世代專用模擬器版本，
+  屬於 gambatte 的分支，在 RNG 方面以 GBA / GBP 為基礎，
+  發展出大量的亂數控制套路
+
+- 研究使用，禁止投稿：
+  Bizhawk (Gambatte / CGB in GBA / GBC)
+  BGB
+  其他模擬器
+
+<!-- -------------- --><hr />
+<h3>重要知識</h3>
+
+- 刪除存檔：
+  上 + Select + B
+
+- Soft Reset：
+  A + B + Start + Select
+
+- Buffer Input：
+  預先輸入指令，
+  讓遊戲「無縫」的接收指令，
+  不會因為閒置 1 幀而漏掉輸入，
+  浪費時間導致亂數失控。
+  
+- A Press：
+  在冒險時按到 A 會暫停世界 2 幀，
+  許多亂數控制要求 1 個或以上的 A Press 操作，
+  而這次 Blue Any% NSC 總共要按 6 次。
+
+- Yoloball：
+  保持 Buffer Input 狀態，
+  讓遇敵到拋球整個過程沒有閒置，
+  就會一發捕捉寶可夢。
+  難點在於文字框「野生寶可夢出現辣！」，
+  只能在 4 幀時間內按掉
+  (通常會 A -> B 鍵刷過去)。
+  
+- Deathfly：
+  利用滅團觸發夢幻漏洞，
+  不用離洞繩 / 飛翔 / 瞬間移動等。
+
+<!-- -------------- --><hr />
+<h3>[亂數控制] TID Manip</h3>
+
+- <font color="gold">利用 Buffer Input 取得理想的 Trainer ID (TID)</font>
+
+- 影片：Youtube ID「<a>u5_hDQ7H98w</a>」
+
+- 目標 TID: 61896 (F1C8)
+
+- 重點：
+  (0) 確保沒有存檔 (上 + Select + B 刪除存檔)
+  (以下步驟確保 Buffer Input 下進行)
+  (1) 上 + Select + B 跳過流星和胖丁
+  (2) 上 + Select + B 進入刪除存檔畫面
+  (3) 進入前按 Start + Select + A + B，
+      文字框顯示一下 C，之後就會開始 Soft Reset
+  (4) 先不要動，等到胖丁畫面
+  (5) 胖丁第一次跳躍時按 A 跳過
+  (6) 標題按 Start 進入
+  (7) 選項畫面前按 B 取消
+  (8) 回到標題先不要動，
+      等到傑尼龜完全離開畫面後按 Start 進入
+      (RNG 正確的話會出現飛腿郎
+       出現臭臭花或是其他寶可夢都會失敗)
+  (9) 選項畫面前按 A 開新遊戲
+
+- Bizhawk 記憶體位置: System Bus - 0xD359 (2 Bytes, Hex, Big Endian)
+
+<!-- -------------- --><hr />
+<h3>設定</h3>
+
+- 按住 B 保持高速顯示文字同時，連打 A 推進對話
+
+- 取名：主角 - <font color="gold">m <sup>M</sup><sub>N</sub> a . ♀️ t F</font>，
+        勁敵 - 預設名字 <font color="gold">RED</font>
+
+- 系統選項：<font color="gold">Fast / Off / Shift</font>
+
+<!-- -------------- --><hr />
+<h3>真新鎮</h3>
+
+- 傷藥 (Potion) 不拿
+- 領取小火龍 (Charmander)，<font color="gold">不用命名</font>
+- 與宿敵對戰
+
+<!-- -------------- --><hr />
+<h3>宿敵戰</h3>
+
+- <font color="white">抓擊 (Scratch) 到底</font>
+- 輸贏不重要
+- 離開研究所，前往 1 號道路
+
+<!-- -------------- --><hr />
+<h3>1 號道路</h3>
+
+- 遇敵就逃跑
+- 超商取貨
+- <font color="gold">繞到大木博士背後對話</font>，宿敵提早出現
+- 完成送貨事件後回到常磐市
+
+<!-- -------------- --><hr />
+<h3>常磐便利商店</h3>
+
+- 購買：<font color="cyan">
+  解毒藥 (Antidote) * 1
+  精靈球 (Poké Ball) * 14</font>
+
+- 離開超商，往左走到 22 號道路
+
+<!-- -------------- --><hr />
+<h3>[亂數控制] Spearow Manip</h3>
+
+- <font color="gold">抓一隻烈雀 (Spearow)</font>
+
+- 影片：Youtube ID「<a>Juvj2kGndfo</a>」
+
+- 重點：
+  (1) 在正確的起點存檔 / 重開機
+  (2) 在 GBC Logo 期間按「左」改變調色盤
+  (3) 全程預先按鍵輸入 (Buffer Input)
+  (4) 不能走錯路線
+  (5) 特定位置按 A
+  (6) 命名：<font color="gold">AA</font>
+
+- 改變調色盤：
+
+<img src="logo_change_palette.png" />
+
+- 按到 A 位置 (4 個)：
+
+<img src="spearow_route.png" />
+
+  (6) 命名：<font color="gold">AA</font>
+
+- (選) 戰鬥期間保持 Buffer Input 將會一發捕捉烈雀 (Yoloball)
+
+<!-- -------------- --><hr />
+<h3>常磐寶可夢中心</h3>
+
+- 寄放小火龍到電腦系統
+- <font color="gold">恢復體力</font> (設置傳送點)
+- 前往 2 號道路
+
+<!-- -------------- --><hr />
+<h3>[亂數控制] Yologlass + Deathfly Manip</h3>
+
+- <font color="gold">森林不遇敵 + 遇到皮卡丘</font>
+
+- 影片：Youtube ID「<a>wmnWBtQiLag</a>」
+
+- 重點：
+  (1) 在正確的起點存檔 / 重開機
+  (2) 在 GBC Logo 期間按「左」改變調色盤
+  (3) 全程預先按鍵輸入 (Buffer Input)
+  (4) 不能走錯路線
+  (5) 特定位置按 A
+
+- (選) 戰鬥期間保持 Buffer Input，皮卡丘將會一發爆擊烈雀 (Pika Crit)
+- 沒有在一回合內掛掉的話，狂放招式直到結束
+
+- A 鍵輸入位置 (2 個)：
+  (1) http://pokeworld.herokuapp.com/rb/51#25,26
+  (2) http://pokeworld.herokuapp.com/rb/51#20,9
+
+<!-- -------------- --><hr />
+<h3>剩下步驟</h3>
+
+- 再次前往常磐森林，進去後馬上二連戰
+- 啄好啄滿
+- 二連戰後會進入巫術狀態，走路、觸發對話變慢
+- 往右走與昆蟲少年對話，進行戰鬥
+- 成功的話，戰鬥結束後會進入殿堂 (關燈)
+- Credits 前的畫面全白，結束計時
+
+<!-- -------------- --><hr />
+<h2>參考資料</h2>
+
+<font color="white">Pokemon NSC 2015 Route - HackMD</font>
+<a href="https://hackmd.io/TCUNwlQkQUGYj1Icv0r9nw" target="_blank">https://hackmd.io/TCUNwlQkQUGYj1Icv0r9nw</a>
+Append 提供的黃版 NSC 2015 年版攻略翻譯 + 註解
+
+<font color="white">Dabomstew/gambatte-speedrun - GitHub</font>
+<a href="https://github.com/Dabomstew/gambatte-speedrun" target="_blank">https://github.com/Dabomstew/gambatte-speedrun</a>
+Fork of https://github.com/sinamas/gambatte with Pokémon speedrunning-related changes
+
+<font color="white">Pokémon Blue NSC full Beginner Guide UPDATED - Google 文件</font>
+<a href="https://docs.google.com/document/d/1l10apKvZgTeOSEKeuhgHVGC73z9-f2FTkuUKHZaPVEA/edit" target="_blank">https://docs.google.com/document/d/1l10apKvZgTeOSEKeuhgHVGC73z9-f2FTkuUKHZaPVEA/edit</a>
+krazyd4n 在 Speedrun.com 排行榜的攻略區發表的新手指南
+
+<font color="white">Pokémon Blue Any% No Save Corruption Guide by davidpoko - Google 文件</font>
+<a href="https://docs.google.com/document/d/14Vep4XZ-46nNPb5r2bK3QNut6G8DHzwe8tkZyTZnJrU/edit" target="_blank">https://docs.google.com/document/d/14Vep4XZ-46nNPb5r2bK3QNut6G8DHzwe8tkZyTZnJrU/edit</a>
+上一篇教學的重點整理，相當簡潔
+
+<font color="white">Why do we need to manipulate the trainer ID ? - Speedrun.com</font>
+<a href="https://www.speedrun.com/pkmnredblue/thread/c2p8x" target="_blank">https://www.speedrun.com/pkmnredblue/thread/c2p8x</a>
+TID 亂數調整的相關討論
+
+<font color="white">RNG manip on GBC - Speedrun.com</font>
+<a href="https://www.speedrun.com/pkmnredblue/thread/jpbib" target="_blank">https://www.speedrun.com/pkmnredblue/thread/jpbib</a>
+實機與模擬器的 RNG 討論
+
+<font color="white">Pokémon Red/Blue/RNG Manipulation FAQ - Pokemon Speedruns Wiki</font>
+<a href="http://wiki.pokemonspeedruns.com/index.php?title=Pok%C3%A9mon_Red/Blue/RNG_Manipulation_FAQ" target="_blank">http://wiki.pokemonspeedruns.com/index.php?title=Pok%C3%A9mon_Red/Blue/RNG_Manipulation_FAQ</a>
+簡單介紹第一世代的亂數控制
+
+<font color="white">[GB / GBA] 寶可夢 藍版 - Any% NSC (Emu) in 13m 44s - Speedrun.com</font>
+<a href="http://wiki.pokemonspeedruns.com/index.php?title=Pok%C3%A9mon_Red/Blue/RNG_Manipulation_FAQ" target="_blank">http://wiki.pokemonspeedruns.com/index.php?title=Pok%C3%A9mon_Red/Blue/RNG_Manipulation_FAQ</a>
+幾天下來的研究 + 練習的成果，
+過程中多次遇敵拖到時間，
+但成功做到 6 次 A Press (+ Yoloball)！
+
+<font color="white">Pokemon Blue - Any% NSC in 13m 36s (RTA) by Spiraster - Youtube</font>
+Youtube ID「<a>79-xyJZ6TVM</a>」
+擁有全程輸入顯示的 RTA 記錄影片
+
+<!-- -------------- --><hr />
+
+</div>
+</body>
+
+<script>
+$(document).ready(function() {
+  $("#rule_button").click(function() {
+    $("#rule").toggle(1000);
+  });
+});
+</script>
+
+</html>
