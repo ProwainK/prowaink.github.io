@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="reveal.js-3.8.0/css/reset.css">
+		<link rel="stylesheet" href="reveal.js-3.8.0/css/reveal.css">
+		<link rel="stylesheet" href="reveal.js-3.8.0/css/theme/night.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="reveal.js-3.8.0/lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js-3.8.0/css/print/pdf.css' : 'reveal.js-3.8.0/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+<style>
+html, body,
+h1, h2, h3, h4, h5, h6,
+li, p {
+
+  font-family: 'DejaVu Sans Mono', monospace, 'GenSenMaruGothic TW TTF' !important;
+}
+
+img {
+  min-width: 65% !important;
+}
+
+</style>
+
+	</head>
+
+<body>
+
+<div class="reveal">
+<div class="slides">
+
+<section>
+  <h1>新仙劍奇俠傳</h1>
+  <h3>Any% NG 四小時內通關流程筆記</h3>
+  <p>
+    <small>Created by <a href="http://hakim.se">Hakim El Hattab</a> and <a href="https://github.com/hakimel/reveal.js/graphs/contributors">contributors</a></small>
+  </p>
+</section>
+
+<section>
+  <h3>羅剎洞</h3>
+  <img src="000-1.jpg" /><br />
+  <ul>
+    <li>[撿] 紫菁玉蓉膏、天仙玉露。不理神仙茶寶箱躲土怪。</li>
+    <li>[敵] 羅剎鬼婆：裝上木劍，按 A</li>
+  </ul>
+</section>
+
+
+<section>
+<h3>盛漁村</h3>
+  <ul>
+    <li>領苗人 500 文錢和客棧櫃台 200 文錢 (700)</li>
+    <li>桂花酒給酒劍仙之後不理嬸嬸直接出去</li>
+    <li>市場跟水生叔對話後按上觸發張四對話就可以觸發神速香蘭</li>
+    <li>李大娘病倒劇情後與小虎對話</li>
+    <li>洪大夫家領靈山仙芝，並按 END 加快購買十里香。(700 - 640 = 60)</li>
+    <li>離開前拿左方櫃子 200 文錢<br />(60 + 200 = 260)</li>
+  </ul>
+</section>
+
+
+<section>
+<h3>仙靈島 (荷花池)</h3>
+  <img src="004-1.jpg" /><br />
+  <ul>
+    <li>蓮花池右路開場，物資沒必要撿</li>
+  </ul>
+</section>
+
+<section>
+  <h3>仙靈島 (水月宮外)</h3>
+  <img src="004-3.jpg" />
+  <ul>
+    <li>一夜過去後水月宮旁箱子拿完止血草，多點一下空箱子準備開始 UBW</li>
+    <li>點十里香並按住 R 緩速用紫金丹取消拿苗刀至少 17 把<br />(極限 29 把，但拿滿耗時)</li>
+  </ul>
+</section>
+
+</div>
+</div>
+
+		<script src="reveal.js-3.8.0/js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'reveal.js-3.8.0/plugin/markdown/marked.js' },
+					{ src: 'reveal.js-3.8.0/plugin/markdown/markdown.js' },
+					{ src: 'reveal.js-3.8.0/plugin/notes/notes.js', async: true },
+					{ src: 'reveal.js-3.8.0/plugin/highlight/highlight.js', async: true }
+				],
+        center: false
+			});
+
+      var resizeSlide = function() {
+        Reveal.configure({
+          width: window.innerWidth + 360 + 100,
+          height: window.innerHeight + 640
+        });
+      }
+
+      setInterval(resizeSlide, 1000);
+
+		</script>
+
+	</body>
+
+</html>
+
