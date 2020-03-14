@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+<meta charset='utf-8'>
+<title>骯骯尬美怕</title>
+
+<style>
+html, body {
+  // margin: 0;
+  // padding: 0;
+}
+
+#gp_info {
+  // border: red 1px solid;
+}
+</style>
+
+</head>
+
+
+<body>
+
+<h1>骯骯尬美怕 (OnonGamepad)</h1>
+<div id='gp_info'></div>
+
+</body>
+
+
+<audio id="audio00" src="./sfx/00.mp3" autoplay="false" ></audio>
+<audio id="audio01" src="./sfx/01.mp3" autoplay="false" ></audio>
+<audio id="audio02" src="./sfx/02.mp3" autoplay="false" ></audio>
+<audio id="audio03" src="./sfx/03.mp3" autoplay="false" ></audio>
+<audio id="audio04" src="./sfx/04.mp3" autoplay="false" ></audio>
+<audio id="audio05" src="./sfx/05.mp3" autoplay="false" ></audio>
+<audio id="audio06" src="./sfx/06.mp3" autoplay="false" ></audio>
+<audio id="audio07" src="./sfx/07.mp3" autoplay="false" ></audio>
+<audio id="audio08" src="./sfx/08.mp3" autoplay="false" ></audio>
+<audio id="audio09" src="./sfx/09.mp3" autoplay="false" ></audio>
+<audio id="audio10" src="./sfx/10.mp3" autoplay="false" ></audio>
+<audio id="audio11" src="./sfx/11.mp3" autoplay="false" ></audio>
+<audio id="audio12" src="./sfx/12.mp3" autoplay="false" ></audio>
+<audio id="audio13" src="./sfx/13.mp3" autoplay="false" ></audio>
+<audio id="audio14" src="./sfx/14.mp3" autoplay="false" ></audio>
+<audio id="audio15" src="./sfx/15.mp3" autoplay="false" ></audio>
+<audio id="audio16" src="./sfx/16.mp3" autoplay="false" ></audio>
+<audio id="audio17" src="./sfx/17.mp3" autoplay="false" ></audio>
+
+
+<script>
+
+var gp_connecting = false;
+var gp_info = document.getElementById('gp_info');
+var gp_connectingcount = 0;
+var gp_letsgo = null;
+var gp_pressed = null;
+
+
+// 監測連接手把
+window.addEventListener("gamepadconnected", (e) => {
+  console.log('[%d] %s 已連線', e.gamepad.index, e.gamepad.id);
+  console.log('按鍵數: %d, Axes: %d', e.gamepad.buttons.length, e.gamepad.axes.length);
+  gpHandler(e, true);
+});
+
+// 監測手把斷線
+window.addEventListener("gamepaddisconnected", (e) => {
+  console.log('[%d] %s 已斷線', e.gamepad.index, e.gamepad.id);
+  gpHandler(e, false);
+});
+
+function gpHandler(e, gp_connecting) {
+  if (gp_connecting) {
+    gp_pressed = new Array(e.gamepad.buttons.length);
+    // 目前只能用單支手把 (Index 0)
+    gp_letsgo = setInterval(function() { gpPrint(e, 0) }, 1);
+  } else {
+    clearInterval(gp_letsgo);
+    gp_connectingcount = 0;
+  }
+}
+
+function gpPrint(e, index) {
+  var gp = navigator.getGamepads()[index];
+  var gp_length = gp.buttons.length;
+
+  gp_info.innerHTML = '[' + gp.index + '] ' + gp.id + '<br />';
+  gp_info.innerHTML += 'Count: ' + gp_connectingcount + '<br />';
+
+  for (var i = 0; i < gp_length; i++) {
+    var is_button_pressed = gp.buttons[i].pressed;
+    gp_info.innerHTML += i + ': ' + is_button_pressed + '<br />';
+    if (is_button_pressed & !gp_pressed[i]) {
+      gpSfx(is_button_pressed, i);
+    }
+    if (!is_button_pressed) {
+      gp_pressed[i] = false;
+    }
+  }
+
+  gp_connectingcount += 1;
+}
+
+function gpSfx(pressed, index) {
+  var audio_index = "audio";
+  if (index < 10) {
+    audio_index = audio_index + "0";
+  }
+  audio_index = audio_index + index;
+  var sound = document.getElementById(audio_index);
+  sound.cloneNode().play();
+  gp_pressed[index] = true;
+}
+
+</script>
+
+</html>
