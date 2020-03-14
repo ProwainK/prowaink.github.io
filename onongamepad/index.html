@@ -29,24 +29,25 @@ html, body {
 </body>
 
 
-<audio id="audio00" src="./sfx/00.mp3" autoplay="false" ></audio>
-<audio id="audio01" src="./sfx/01.mp3" autoplay="false" ></audio>
-<audio id="audio02" src="./sfx/02.mp3" autoplay="false" ></audio>
-<audio id="audio03" src="./sfx/03.mp3" autoplay="false" ></audio>
-<audio id="audio04" src="./sfx/04.mp3" autoplay="false" ></audio>
-<audio id="audio05" src="./sfx/05.mp3" autoplay="false" ></audio>
-<audio id="audio06" src="./sfx/06.mp3" autoplay="false" ></audio>
-<audio id="audio07" src="./sfx/07.mp3" autoplay="false" ></audio>
-<audio id="audio08" src="./sfx/08.mp3" autoplay="false" ></audio>
-<audio id="audio09" src="./sfx/09.mp3" autoplay="false" ></audio>
-<audio id="audio10" src="./sfx/10.mp3" autoplay="false" ></audio>
-<audio id="audio11" src="./sfx/11.mp3" autoplay="false" ></audio>
-<audio id="audio12" src="./sfx/12.mp3" autoplay="false" ></audio>
-<audio id="audio13" src="./sfx/13.mp3" autoplay="false" ></audio>
-<audio id="audio14" src="./sfx/14.mp3" autoplay="false" ></audio>
-<audio id="audio15" src="./sfx/15.mp3" autoplay="false" ></audio>
-<audio id="audio16" src="./sfx/16.mp3" autoplay="false" ></audio>
-<audio id="audio17" src="./sfx/17.mp3" autoplay="false" ></audio>
+<!-- DS4 手把 -->
+<audio id='audio_gp00' src='./sfx/00.mp3'></audio>
+<audio id='audio_gp01' src='./sfx/01.mp3'></audio>
+<audio id='audio_gp02' src='./sfx/02.mp3'></audio>
+<audio id='audio_gp03' src='./sfx/03.mp3'></audio>
+<audio id='audio_gp04' src='./sfx/04.mp3'></audio>
+<audio id='audio_gp05' src='./sfx/05.mp3'></audio>
+<audio id='audio_gp06' src='./sfx/06.mp3'></audio>
+<audio id='audio_gp07' src='./sfx/07.mp3'></audio>
+<audio id='audio_gp08' src='./sfx/08.mp3'></audio>
+<audio id='audio_gp09' src='./sfx/09.mp3'></audio>
+<audio id='audio_gp10' src='./sfx/10.mp3'></audio>
+<audio id='audio_gp11' src='./sfx/11.mp3'></audio>
+<audio id='audio_gp12' src='./sfx/12.mp3'></audio>
+<audio id='audio_gp13' src='./sfx/13.mp3'></audio>
+<audio id='audio_gp14' src='./sfx/14.mp3'></audio>
+<audio id='audio_gp15' src='./sfx/15.mp3'></audio>
+<audio id='audio_gp16' src='./sfx/16.mp3'></audio>
+<audio id='audio_gp17' src='./sfx/17.mp3'></audio>
 
 
 <script>
@@ -56,7 +57,6 @@ var gp_info = document.getElementById('gp_info');
 var gp_connectingcount = 0;
 var gp_letsgo = null;
 var gp_pressed = null;
-
 
 // 監測連接手把
 window.addEventListener("gamepadconnected", (e) => {
@@ -104,13 +104,18 @@ function gpPrint(e, index) {
 }
 
 function gpSfx(pressed, index) {
-  var audio_index = "audio";
+  var audio_index = 'audio_gp';
   if (index < 10) {
-    audio_index = audio_index + "0";
+    audio_index = audio_index + '0';
   }
   audio_index = audio_index + index;
   var sound = document.getElementById(audio_index);
-  sound.cloneNode().play();
+
+  // sound.cloneNode().play();
+  sound = sound.cloneNode();
+  sound.volume = 0.6;
+  sound.play();
+
   gp_pressed[index] = true;
 }
 
