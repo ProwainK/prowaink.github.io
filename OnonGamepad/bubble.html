@@ -9,8 +9,8 @@
 
   <style>
     html, body {
-      // margin: 0;
-      // padding: 0;
+      margin: 0;
+      padding: 0;
     }
 
     #gp_info {
@@ -31,31 +31,31 @@
 </head>
 
 <body>
-  <h1>骯骯尬美怕 (OnonGamepad)</h1>
+  <!-- <h1>骯骯尬美怕 (OnonGamepad)</h1> -->
   <canvas id='sfx_bubble' width='640' height='360'></canvas>
-  <div id='gp_info'></div>
+  <!-- <div id='gp_info'></div> -->
 </body>
 
 <script src="./sfx/_sfx_list_.js"></script>
 <script src="./base.js"></script>
-<!-- <script src="./bubble.js"></script> -->
+<script src="./bubble.js"></script>
 
 <script>
 function gpPrint(e, index) {
   var gp = navigator.getGamepads()[index];
   var gp_length = gp.buttons.length;
 
-  $("#gp_info").empty();
-  gp_info.innerHTML = '[' + gp.index + '] ' + gp.id + '<br />';
-  gp_info.innerHTML += 'Count: ' + gp_connectingcount + '<br />';
+  //$("#gp_info").empty();
+  //gp_info.innerHTML = '[' + gp.index + '] ' + gp.id + '<br />';
+  //gp_info.innerHTML += 'Count: ' + gp_connectingcount + '<br />';
 
   for (var i = 0; i < gp_length; i++) {
     var is_button_pressed = gp.buttons[i].pressed;
-    gp_info.innerHTML += i + ': ' + is_button_pressed + '<br />';
+    //gp_info.innerHTML += i + ': ' + is_button_pressed + '<br />';
     if (is_button_pressed & !gp_pressed[i]) {
       ononSfx(is_button_pressed, i);
       // text bubble
-      //createNewBubble(my_sfx[i]);
+      createNewBubble(my_sfx[i]);
     }
     if (!is_button_pressed) {
       gp_pressed[i] = false;
