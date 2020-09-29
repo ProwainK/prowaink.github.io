@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Line Chart</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+	<script src="https://www.chartjs.org/dist/2.9.2/Chart.min.js"></script>
+	<style>
+		canvas {
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+
+<body>
+
+<div style="width:75%;">
+  <canvas id="chart"></canvas>
+</div>
+
+	<script>
+var canvas = document.getElementById('chart');
+var myChart = new Chart(canvas, {
+  type: 'line',
+  data: {
+    labels: ["2019-04-19", "2019-12-08"],
+    datasets: [
+
+      { label: '舒捷 (master_fiora / jhon800703)',
+        yAxisID: 'Record',
+        data: [
+          { "x": "2019-04-25", "y": 11784},
+          { "x": "2019-05-06", "y": 10858},
+          { "x": "2019-09-02", "y": 10660},
+          { "x": "2019-09-07", "y": 10488},
+          { "x": "2019-10-01", "y": 10360},
+          { "x": "2019-10-14", "y": 10281},
+          { "x": "2019-11-13", "y": 10154}, // 2h 49m 14s
+          { "x": "2019-12-01", "y": 10145}, // 2h 49m 05s
+          { "x": "2019-12-03", "y": 9963},  // 2h 46m 03s
+          { "x": "2019-12-07", "y": 9795}   // 2h 43m 15s
+        ],
+        borderColor: 'rgba(70, 190, 240, 1)',
+        backgroundColor: 'rgba(70, 190, 240, 0.2)'
+      },
+
+      { label: '牛排八分熟 (alex155045)',
+        yAxisID: 'Record',
+        data: [
+          { "x": "2019-04-20", "y": 11746},
+          { "x": "2019-04-27", "y": 11009},
+          { "x": "2019-05-01", "y": 10621},
+          { "x": "2019-05-11", "y": 10415},
+          { "x": "2019-11-08", "y": 10204}, // 2h 50m 04s
+          { "x": "2019-11-16", "y": 10109}  // 2h 48m 29s
+        ],
+        borderColor: 'rgba(160, 20, 160, 1)',
+        backgroundColor: 'rgba(160, 20, 160, 0.2)'
+      },
+
+    ]
+  },
+  options: {
+    scales: {
+      xAxes: [{
+        type: 'time',
+        distribution: 'linear'
+      }],
+      yAxes: [{
+        id: 'Record',
+        type: 'linear',
+        position: 'left',
+        ticks: {
+          max: 12000,
+          min: 9600,
+          userCallback: function(v) { return epoch_to_hh_mm_ss(v) },
+          stepSize: 30 * 60
+        }
+      }]
+    },
+    tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            return data.datasets[tooltipItem.datasetIndex].label + ': ' + epoch_to_hh_mm_ss(tooltipItem.yLabel)
+          }
+        }
+      }
+  }
+});
+
+function epoch_to_hh_mm_ss(epoch) {
+  return new Date(epoch*1000).toISOString().substr(12, 7)
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Line Chart</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+	<script src="https://www.chartjs.org/dist/2.9.2/Chart.min.js"></script>
+	<style>
+		canvas {
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+
+<body>
+
+<div style="width:75%;">
+  <canvas id="chart"></canvas>
+</div>
+
+	<script>
+var canvas = document.getElementById('chart');
+var myChart = new Chart(canvas, {
+  type: 'line',
+  data: {
+    labels: ["2016-01-01", "2019-12-08"],
+    datasets: [
+
+      { label: '舒捷 (master_fiora / jhon800703)',
+        yAxisID: 'Record',
+        data: [
+          { "x": "2018-08-27", "y": 18794},
+          { "x": "2018-08-30", "y": 17020},
+          { "x": "2018-09-15", "y": 14008},
+          { "x": "2018-09-16", "y": 13793},
+          { "x": "2018-09-24", "y": 13144},
+          { "x": "2019-04-25", "y": 11784},
+          { "x": "2019-05-06", "y": 10858},
+          { "x": "2019-09-02", "y": 10660},
+          { "x": "2019-09-07", "y": 10488},
+          { "x": "2019-10-01", "y": 10360},
+          { "x": "2019-10-14", "y": 10281},
+          { "x": "2019-11-13", "y": 10154}, // 2h 49m 14s
+          { "x": "2019-12-01", "y": 10145}, // 2h 49m 05s
+          { "x": "2019-12-03", "y": 9963},  // 2h 46m 03s
+          { "x": "2019-12-07", "y": 9795}   // 2h 43m 15s
+        ],
+        borderColor: 'rgba(70, 190, 240, 1)',
+        backgroundColor: 'rgba(70, 190, 240, 0.2)'
+      },
+
+      { label: '牛排八分熟 (alex155045)',
+        yAxisID: 'Record',
+        data: [
+          { "x": "2018-08-31", "y": 15701},
+          { "x": "2018-09-02", "y": 13940},
+          { "x": "2018-09-23", "y": 12549},
+          { "x": "2018-10-07", "y": 12177},
+          { "x": "2019-04-20", "y": 11746},
+          { "x": "2019-04-27", "y": 11009},
+          { "x": "2019-05-01", "y": 10621},
+          { "x": "2019-05-11", "y": 10415},
+          { "x": "2019-11-08", "y": 10204}, // 2h 50m 04s
+          { "x": "2019-11-16", "y": 10109}  // 2h 48m 29s
+        ],
+        borderColor: 'rgba(160, 20, 160, 1)',
+        backgroundColor: 'rgba(160, 20, 160, 0.2)'
+      },
+
+      { label: '鴉片 (Append)',
+        yAxisID: 'Record',
+        data: [
+          { "x": "2016-03-21", "y": 21270},
+          { "x": "2016-04-04", "y": 17064},
+          { "x": "2016-05-01", "y": 16297},
+          { "x": "2018-01-16", "y": 14812},
+          { "x": "2018-08-26", "y": 14549},
+          { "x": "2018-09-02", "y": 13170}
+        ],
+        borderColor: 'rgba(240, 120, 115, 1)',
+        backgroundColor: 'rgba(240, 120, 115, 0.2)'
+      },
+
+      { label: 'ISUQQ',
+        yAxisID: 'Record',
+        data: [
+          { "x": "2018-09-22", "y": 14015}
+        ],
+        borderColor: 'rgba(10, 180, 120, 1)',
+        backgroundColor: 'rgba(10, 180, 120, 0.2)'
+      },
+
+      { label: 'r000tmnt',
+        yAxisID: 'Record',
+        data: [
+          { "x": "2018-08-31", "y": 21429},
+          { "x": "2019-05-18", "y": 15808}
+        ],
+        borderColor: 'rgba(60, 80, 130, 1)',
+        backgroundColor: 'rgba(60, 80, 130, 0.2)'
+      },
+
+      { label: 'ProwainK',
+        yAxisID: 'Record',
+        data: [
+          { "x": "2018-08-17", "y": 20208}
+        ],
+        borderColor: 'rgba(240, 190, 60, 1)',
+        backgroundColor: 'rgba(240, 190, 60, 0.2)'
+      }
+
+    ]
+  },
+  options: {
+    scales: {
+      xAxes: [{
+        type: 'time',
+        distribution: 'linear'
+      }],
+      yAxes: [{
+        id: 'Record',
+        type: 'linear',
+        position: 'left',
+        ticks: {
+          max: 21600,
+          min: 7200,
+          userCallback: function(v) { return epoch_to_hh_mm_ss(v) },
+          stepSize: 30 * 60
+        }
+      }]
+    },
+    tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            return data.datasets[tooltipItem.datasetIndex].label + ': ' + epoch_to_hh_mm_ss(tooltipItem.yLabel)
+          }
+        }
+      }
+  }
+});
+
+function epoch_to_hh_mm_ss(epoch) {
+  return new Date(epoch*1000).toISOString().substr(12, 7)
+}
+
+</script>
+
+</body>
+
+</html>
